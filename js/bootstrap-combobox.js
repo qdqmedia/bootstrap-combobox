@@ -36,6 +36,7 @@
     this.selected = false
     this.refresh()
     this.listen()
+    this.adjustWidth()
   }
 
   /* NOTE: COMBOBOX EXTENDS BOOTSTRAP-TYPEAHEAD.js
@@ -96,6 +97,12 @@
   , refresh: function () {
     this.source = this.parse()
     this.options.items = this.source.length
+  }
+
+  , adjustWidth: function() {
+    var wid = this.$element.width();
+    // bootstrap min input size is 206, we need at least 30px for the select icon (the icon with arrow)
+    if (wid < 236) this.$element.width(wid - 30);
   }
 
   // modified typeahead function adding container and target handling
